@@ -23,12 +23,16 @@ body {
 }
 
 #orgasm {
-    height: 10vh;
+    height: 11vh;
     width: 15vw;
     background-image: url('../img/on_logo.png');
     background-size: contain;
     background-position: left;
     background-repeat: no-repeat;
+}
+
+.phone {
+    display: none;
 }
 
 #win {
@@ -132,6 +136,7 @@ body {
 @media screen and (max-width: 700px) {
     body {
         flex-direction: column;
+        justify-content: center;
         gap: 8vh;
     }
 
@@ -143,15 +148,34 @@ body {
         height: 27vw;
     }
 
-    #moloko {
-        height: 10vh;
-        width: 50vw;
+    #moloko, #orgasm {
+        display: none;
+    }
+
+    .phone {
+        display: flex;
+        width: 81vw;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    #moloko-phone {
+        height: 6.5vh;
+        width: 35vw;
+        margin-top: 1.2vh;
+        background-image: url('../img/pm_logo.png');
+        background-size: contain;
+        background-repeat: no-repeat;
         background-position: center;
     }
-    
-    #orgasm {
-        height: 8vh;
-        width: 50vw;
+
+    #orgasm-phone {
+        height: 15vh;
+        width: 35vw;
+        background-image: url('../img/on_logo.png');
+        background-size: contain;
+        background-repeat: no-repeat;
         background-position: center;
     }
 
