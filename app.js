@@ -4,7 +4,7 @@ function calculateSalary() {
     const unscheduledHours = parseFloat(document.getElementById('unscheduledHours').value);
     const holiadyHours = parseFloat(document.getElementById('holiadyHours').value);
     const nightHours = parseFloat(document.getElementById('nightHours').value) / 2;
-    const interCalculation = parseFloat(document.getElementById('interCalculation').value) * 1.5;
+    const interCalculation = Math.round((parseFloat(document.getElementById('interCalculation').value) * 1.5) * 100) / 100;
     const overtimeHours = parseFloat(document.getElementById('overtimeHours').value);
     const overPayment = parseFloat(document.getElementById('overPayment').value);
 
