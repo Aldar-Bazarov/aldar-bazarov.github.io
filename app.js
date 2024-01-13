@@ -2,14 +2,16 @@ function calculateSalary() {
     const salary = parseFloat(document.getElementById('salary').value);
     const normHours = parseFloat(document.getElementById('normHours').value);
     const unscheduledHours = parseFloat(document.getElementById('unscheduledHours').value);
+    const holiadyHours = parseFloat(document.getElementById('holiadyHours').value);
     const nightHours = parseFloat(document.getElementById('nightHours').value) / 2;
-    const interCalculation = parseFloat(document.getElementById('interCalculation').value);
+    const interCalculation = parseFloat(document.getElementById('interCalculation').value) * 1.5;
     const overtimeHours = parseFloat(document.getElementById('overtimeHours').value);
     const overPayment = parseFloat(document.getElementById('overPayment').value);
 
     let overtimeBonus = Math.round((salary / normHours * unscheduledHours) * 100) / 100;
-    let qualificationBonus = Math.round((salary / normHours * (normHours + unscheduledHours)) * 0.2 * 100) / 100;
-    let hazardBonus = Math.round((salary / normHours * (normHours + unscheduledHours)) * 0.04 * 100) / 100;
+    let holidayBonus = Math.round((salary / normHours * holiadyHours) * 100) / 100;
+    let qualificationBonus = Math.round((salary / normHours * (normHours + unscheduledHours + holiadyHours)) * 0.2 * 100) / 100;
+    let hazardBonus = Math.round((salary / normHours * (normHours + unscheduledHours + holiadyHours)) * 0.04 * 100) / 100;
     let basePayment = salary;
     let nightBonus = Math.round((salary / normHours * nightHours) * 100) / 100;
     const qualityCoefficient = 3500;
@@ -19,6 +21,7 @@ function calculateSalary() {
             + parseFloat(hazardBonus)
             + parseFloat(nightBonus)
             + parseFloat(overtimeBonus)
+            + parseFloat(holidayBonus)
             + qualityCoefficient)
         * 100) / 100;
     let regionalCoefficient = Math.round((totalPayment * 0.2) * 100) / 100;
@@ -34,11 +37,12 @@ function calculateSalary() {
         <li>Северная надбавка: ${northernAllowance}</li>
         <li>Межрасчёт: ${interCalculation}</li>
         <li>Доплата за часы вне графика: ${overtimeBonus}</li>
+        <li>Доплата за праздничные: ${holidayBonus}</li>
         <li>Коэфф. качества (Субсидия): ${qualityCoefficient}</li>
         <li>Доп. выплаты: ${overPayment}</li>
     `;
 
-    let sum = qualificationBonus + hazardBonus + basePayment
+    let sum = holidayBonus + qualificationBonus + hazardBonus + basePayment
         + nightBonus + regionalCoefficient + northernAllowance
         + interCalculation + overtimeBonus + qualityCoefficient + overPayment
 
