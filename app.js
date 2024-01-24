@@ -7,6 +7,7 @@ function calculateSalary() {
     const interCalculation = Math.round((parseFloat(document.getElementById('interCalculation').value) * 1.5) * 100) / 100;
     const overtimeHours = parseFloat(document.getElementById('overtimeHours').value);
     const overPayment = parseFloat(document.getElementById('overPayment').value);
+    const subsidy = parseFloat(document.getElementById('subsidy').value);
 
     let overtimeBonus = Math.round((salary / normHours * unscheduledHours) * 100) / 100;
     let holidayBonus = Math.round((salary / normHours * holiadyHours) * 100) / 100;
@@ -14,7 +15,6 @@ function calculateSalary() {
     let hazardBonus = Math.round((salary / normHours * (normHours + unscheduledHours + holiadyHours)) * 0.04 * 100) / 100;
     let basePayment = salary;
     let nightBonus = Math.round((salary / normHours * nightHours) * 100) / 100;
-    const qualityCoefficient = 3500;
     let totalPayment = Math.round(
         (parseFloat(basePayment)
             + parseFloat(qualificationBonus)
@@ -22,7 +22,7 @@ function calculateSalary() {
             + parseFloat(nightBonus)
             + parseFloat(overtimeBonus)
             + parseFloat(holidayBonus)
-            + qualityCoefficient)
+            + subsidy)
         * 100) / 100;
     let regionalCoefficient = Math.round((totalPayment * 0.2) * 100) / 100;
     let northernAllowance = Math.round((totalPayment * 0.3) * 100) / 100;
@@ -38,13 +38,13 @@ function calculateSalary() {
         <li>Межрасчёт: ${interCalculation}</li>
         <li>Доплата за часы вне графика: ${overtimeBonus}</li>
         <li>Доплата за праздничные: ${holidayBonus}</li>
-        <li>Коэфф. качества (Субсидия): ${qualityCoefficient}</li>
+        <li>Коэфф. качества (Субсидия): ${subsidy}</li>
         <li>Доп. выплаты: ${overPayment}</li>
     `;
 
     let sum = holidayBonus + qualificationBonus + hazardBonus + basePayment
         + nightBonus + regionalCoefficient + northernAllowance
-        + interCalculation + overtimeBonus + qualityCoefficient + overPayment
+        + interCalculation + overtimeBonus + subsidy + overPayment
 
     const nightOverHours = parseFloat(document.getElementById('nightOverHours').value) / 2;
 
