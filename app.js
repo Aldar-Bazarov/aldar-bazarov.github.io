@@ -1,6 +1,7 @@
 function calculateSalary() {
     const salary = parseFloat(document.getElementById('salary').value);
     const normHours = parseFloat(document.getElementById('normHours').value);
+    const workedHours = parseFloat(document.getElementById('workedHours').value);
     const unscheduledHours = parseFloat(document.getElementById('unscheduledHours').value);
     const holiadyHours = parseFloat(document.getElementById('holiadyHours').value);
     const nightHours = parseFloat(document.getElementById('nightHours').value) / 2;
@@ -9,12 +10,13 @@ function calculateSalary() {
     const overPayment = parseFloat(document.getElementById('overPayment').value);
     const subsidy = parseFloat(document.getElementById('subsidy').value);
 
+    let basePayment = Math.round((salary / normHours * workedHours) * 100) / 100;
     let overtimeBonus = Math.round((salary / normHours * unscheduledHours) * 100) / 100;
     let holidayBonus = Math.round((salary / normHours * holiadyHours) * 100) / 100;
-    let qualificationBonus = Math.round((salary / normHours * (normHours + unscheduledHours + holiadyHours)) * 0.2 * 100) / 100;
-    let hazardBonus = Math.round((salary / normHours * (normHours + unscheduledHours + holiadyHours)) * 0.04 * 100) / 100;
-    let basePayment = salary;
+    let qualificationBonus = Math.round((salary / normHours * (workedHours + unscheduledHours + holiadyHours)) * 0.2 * 100) / 100;
+    let hazardBonus = Math.round((salary / normHours * (workedHours + unscheduledHours + holiadyHours)) * 0.04 * 100) / 100;
     let nightBonus = Math.round((salary / normHours * nightHours) * 100) / 100;
+
     let totalPayment = Math.round(
         (parseFloat(basePayment)
             + parseFloat(qualificationBonus)
@@ -24,6 +26,7 @@ function calculateSalary() {
             + parseFloat(holidayBonus)
             + subsidy)
         * 100) / 100;
+
     let regionalCoefficient = Math.round((totalPayment * 0.2) * 100) / 100;
     let northernAllowance = Math.round((totalPayment * 0.3) * 100) / 100;
 
