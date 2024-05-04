@@ -1,51 +1,47 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Калькулятор</title>
-    <link rel="stylesheet" href="./styles.css">
-</head>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
 
-<body>
+  <body>
     <h1>Калькулятор зарплаты</h1>
 
     <form id="salaryForm">
-        <label for="salary">Оклад:</label>
-        <input type="number" id="salary" required>
+      <label for="normHours">Норма часов:</label>
+      <input type="number" id="normHours" required />
 
-        <label for="normHours">Норма часов:</label>
-        <input type="number" id="normHours" required>
+      <label for="workedHours">Отработано часов из ставки:</label>
+      <input type="number" id="workedHours" required />
 
-        <label for="workedHours">Отработано часов из ставки:</label>
-        <input type="number" id="workedHours" required>
+      <label for="unscheduledHours">Часы вне графика:</label>
+      <input type="number" id="unscheduledHours" required />
 
-        <label for="unscheduledHours">Часы вне графика:</label>
-        <input type="number" id="unscheduledHours" required>
+      <label for="holiadyHours">Праздничные часы:</label>
+      <input type="number" id="holiadyHours" required />
 
-        <label for="holiadyHours">Праздничные часы:</label>
-        <input type="number" id="holiadyHours" required>
+      <label for="nightHours">Ночные часы:</label>
+      <input type="number" id="nightHours" required />
 
-        <label for="nightHours">Ночные часы:</label>
-        <input type="number" id="nightHours" required>
+      <label for="interCalculation">Сумма межрасчёта:</label>
+      <input type="number" id="interCalculation" required />
 
-        <label for="interCalculation">Сумма межрасчёта:</label>
-        <input type="number" id="interCalculation" required>
+      <label for="overtimeHours">Часы свыше ставки:</label>
+      <input type="number" id="overtimeHours" required />
 
-        <label for="overtimeHours">Часы свыше ставки:</label>
-        <input type="number" id="overtimeHours" required>
+      <label for="nightOverHours">Ночные часы свыше ставки:</label>
+      <input type="number" id="nightOverHours" required />
 
-        <label for="nightOverHours">Ночные часы свыше ставки:</label>
-        <input type="number" id="nightOverHours" required>
+      <label for="overPayment">Дополнительные выплаты:</label>
+      <input type="number" id="overPayment" required />
 
-        <label for="overPayment">Дополнительные выплаты:</label>
-        <input type="number" id="overPayment" required>
+      <label for="subsidy">Коэфф. качества (Субсидия):</label>
+      <input type="number" id="subsidy" required />
 
-        <label for="subsidy">Коэфф. качества (Субсидия):</label>
-        <input type="number" id="subsidy" required>
-
-        <button type="button" onclick="calculateSalary()">Рассчитать</button>
+      <button type="button" onclick="calculateSalary()">Рассчитать</button>
     </form>
 
     <h2>Общий расчет:</h2>
@@ -58,6 +54,5 @@
     <ul id="paymentList"></ul>
 
     <script src="./app.js"></script>
-</body>
-
+  </body>
 </html>
