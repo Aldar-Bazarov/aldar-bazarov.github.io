@@ -7,7 +7,7 @@ function calculateSalary() {
     const nightHours = parseFloat(document.getElementById('nightHours').value) / 2;
     const interCalculation = Math.round((parseFloat(document.getElementById('interCalculation').value) * 1.5) * 100) / 100;
     const overtimeHours = parseFloat(document.getElementById('overtimeHours').value);
-    const overPayment = parseFloat(document.getElementById('overPayment').value);
+    // const overPayment = parseFloat(document.getElementById('overPayment').value);
     const subsidy = parseFloat(document.getElementById('subsidy').value);
 
     let basePayment = Math.round((salary / normHours * workedHours) * 100) / 100;
@@ -42,12 +42,11 @@ function calculateSalary() {
         <li>Доплата за часы вне графика: ${overtimeBonus}</li>
         <li>Доплата за праздничные: ${holidayBonus}</li>
         <li>Коэфф. качества (Субсидия): ${subsidy}</li>
-        <li>Доп. выплаты: ${overPayment}</li>
     `;
 
     let sum = holidayBonus + qualificationBonus + hazardBonus + basePayment
         + nightBonus + regionalCoefficient + northernAllowance
-        + interCalculation + overtimeBonus + subsidy + overPayment
+        + interCalculation + overtimeBonus + subsidy
 
     const nightOverHours = parseFloat(document.getElementById('nightOverHours').value) / 2;
 
