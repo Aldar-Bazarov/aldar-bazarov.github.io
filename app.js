@@ -1,3 +1,16 @@
+const overPayment = document.getElementById('overPayment');
+const extraFields = document.getElementById('extraFields');
+extraFields.style.display = 'none'
+
+overPayment.addEventListener('change', function () {
+    if (overPayment.checked) {
+        extraFields.style.display = 'block';
+    } else {
+        extraFields.style.display = 'none';
+    }
+});
+
+
 function calculateSalary() {
     const salary = parseFloat(document.getElementById('salary').value);
     const normHours = parseFloat(document.getElementById('normHours').value);
@@ -5,10 +18,16 @@ function calculateSalary() {
     const unscheduledHours = parseFloat(document.getElementById('unscheduledHours').value);
     const holiadyHours = parseFloat(document.getElementById('holiadyHours').value);
     const nightHours = parseFloat(document.getElementById('nightHours').value) / 2;
-    const interCalculation = Math.round((parseFloat(document.getElementById('interCalculation').value) * 1.5) * 100) / 100;
-    const overtimeHours = parseFloat(document.getElementById('overtimeHours').value);
-    // const overPayment = parseFloat(document.getElementById('overPayment').value);
+    let interCalculation = Math.round((parseFloat(document.getElementById('interCalculation').value) * 1.5) * 100) / 100;
+    let overHours = parseFloat(document.getElementById('overHours').value);
+    let nightOverHours = parseFloat(document.getElementById('nightOverHours').value) / 2;
     const subsidy = parseFloat(document.getElementById('subsidy').value);
+
+    if (!overPayment.checked) {
+        interCalculation = 0
+        overHours = 1
+        nightOverHours = 1
+    }
 
     let basePayment = Math.round((salary / normHours * workedHours) * 100) / 100;
     let overtimeBonus = Math.round((salary / normHours * unscheduledHours) * 100) / 100;
@@ -32,27 +51,25 @@ function calculateSalary() {
 
     const mainResultsList = document.getElementById('mainResultsList');
     mainResultsList.innerHTML = `
-        <li>Коэфф. квалификации 20%: ${qualificationBonus}</li>
-        <li>Доплата за вредность 4%: ${hazardBonus}</li>
-        <li>Оплата по окладу: ${basePayment}</li>
-        <li>Доплата за ночные часы: ${nightBonus}</li>
-        <li>Районный коэффициент: ${regionalCoefficient}</li>
-        <li>Северная надбавка: ${northernAllowance}</li>
-        <li>Межрасчёт: ${interCalculation}</li>
-        <li>Доплата за часы вне графика: ${overtimeBonus}</li>
-        <li>Доплата за праздничные: ${holidayBonus}</li>
-        <li>Коэфф. качества (Субсидия): ${subsidy}</li>
-    `;
+    <li>Коэфф. квалификации 20%: ${qualificationBonus}</li>
+    <li>Доплата за вредность 4%: ${hazardBonus}</li>
+    <li>Оплата по окладу: ${basePayment}</li>
+    <li>Доплата за ночные часы: ${nightBonus}</li>
+    <li>Районный коэффициент: ${regionalCoefficient}</li>
+    <li>Северная надбавка: ${northernAllowance}</li>
+    ${overPayment.checked ? `<li>Межрасчёт: ${interCalculation}</li>` : ""}
+    <li>Доплата за часы вне графика: ${overtimeBonus}</li>
+    <li>Доплата за праздничные: ${holidayBonus}</li>
+    <li>Коэфф. качества (Субсидия): ${subsidy}</li>
+`;
 
     let sum = holidayBonus + qualificationBonus + hazardBonus + basePayment
         + nightBonus + regionalCoefficient + northernAllowance
         + interCalculation + overtimeBonus + subsidy
 
-    const nightOverHours = parseFloat(document.getElementById('nightOverHours').value) / 2;
-
-    qualificationBonus = Math.round((salary / normHours * overtimeHours) * 0.2 * 100) / 100;
-    hazardBonus = Math.round((salary / normHours * overtimeHours) * 0.04 * 100) / 100;
-    basePayment = Math.round((salary / normHours * overtimeHours) * 100) / 100;
+    qualificationBonus = Math.round((salary / normHours * overHours) * 0.2 * 100) / 100;
+    hazardBonus = Math.round((salary / normHours * overHours) * 0.04 * 100) / 100;
+    basePayment = Math.round((salary / normHours * overHours) * 100) / 100;
     nightBonus = Math.round((salary / normHours * nightOverHours) * 100) / 100;
     totalPayment = Math.round(
         (parseFloat(basePayment)

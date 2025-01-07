@@ -65,6 +65,17 @@ ul li {
     margin-bottom: 20px;
 }
 
+.overPayment {
+    display: flex;
+    column-gap: 30px;
+    justify-content: left;
+}
+
+#overPayment {
+    height: 15px;
+    width: 15px;
+}
+
 /* Медиазапрос для размеров iPhone 11 (или других мобильных устройств) */
 @media only screen and (max-width: 414px) {
     body {

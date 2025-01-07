@@ -12,6 +12,11 @@
   <h1>Калькулятор зарплаты</h1>
 
   <form id="salaryForm">
+    <div class="overPayment">
+      <label for="overPayment">Дополнительные поля:</label>
+      <input type="checkbox" id="overPayment" />
+    </div>
+
     <label for="salary">Оклад:</label>
     <input type="number" id="salary" required />
 
@@ -30,17 +35,16 @@
     <label for="nightHours">Ночные часы:</label>
     <input type="number" id="nightHours" required />
 
-    <label for="interCalculation">Сумма межрасчёта:</label>
-    <input type="number" id="interCalculation" required />
+    <div id="extraFields">
+      <label for="interCalculation">Сумма межрасчёта:</label>
+      <input type="number" id="interCalculation" required />
 
-    <label for="overtimeHours">Часы свыше ставки:</label>
-    <input type="number" id="overtimeHours" required />
+      <label for="overHours">Часы свыше ставки:</label>
+      <input type="number" id="overHours" required />
 
-    <label for="nightOverHours">Ночные часы свыше ставки:</label>
-    <input type="number" id="nightOverHours" required />
-
-    <!-- <label for="overPayment">Дополнительные выплаты:</label>
-    <input type="number" id="overPayment" required /> -->
+      <label for="nightOverHours">Ночные часы свыше ставки:</label>
+      <input type="number" id="nightOverHours" required />
+    </div>
 
     <label for="subsidy">Коэфф. качества (Субсидия):</label>
     <input type="number" id="subsidy" required />
