@@ -1,12 +1,16 @@
 const overPayment = document.getElementById('overPayment');
 const extraFields = document.getElementById('extraFields');
 extraFields.style.display = 'none'
+const overResults = document.getElementById('overResults');
+overResults.style.display = 'none'
 
 overPayment.addEventListener('change', function () {
     if (overPayment.checked) {
         extraFields.style.display = 'block';
+        overResults.style.display = 'block'
     } else {
         extraFields.style.display = 'none';
+        overResults.style.display = 'none'
     }
 });
 
@@ -25,8 +29,8 @@ function calculateSalary() {
 
     if (!overPayment.checked) {
         interCalculation = 0
-        overHours = 1
-        nightOverHours = 1
+        overHours = 0
+        nightOverHours = 0
     }
 
     let basePayment = Math.round((salary / normHours * workedHours) * 100) / 100;
@@ -80,8 +84,10 @@ function calculateSalary() {
     regionalCoefficient = Math.round((totalPayment * 0.2) * 100) / 100;
     northernAllowance = Math.round((totalPayment * 0.3) * 100) / 100;
 
-    const overResultsList = document.getElementById('overResultsList');
-    overResultsList.innerHTML = `
+
+    if (overPayment.checked) {
+        const overResultsList = document.getElementById('overResultsList')
+        overResultsList.innerHTML = `
         <li>Коэфф. квалификации 20%: ${qualificationBonus}</li>
         <li>Доплата за вредность 4%: ${hazardBonus}</li>
         <li>Оплата по окладу: ${basePayment}</li>
@@ -89,6 +95,7 @@ function calculateSalary() {
         <li>Районный коэффициент: ${regionalCoefficient}</li>
         <li>Северная надбавка: ${northernAllowance}</li>
     `;
+    }
 
     sum += qualificationBonus + hazardBonus + basePayment + nightBonus + regionalCoefficient + northernAllowance;
     sum = Math.round(sum * 100) / 100;
